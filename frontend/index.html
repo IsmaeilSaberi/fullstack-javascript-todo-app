@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fullsatack Todolist js</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Todo list</h1>
+    <form class="input-container">
+      <input type="text" id="input-todo" placeholder="Enter Todo" />
+      <button id="add-todo" type="submit">+</button>
+    </form>
+    <div class="todo-container">
+      <div class="todo">
+        <div class="todo-info">
+          <input type="checkbox" class="todo-completed" checked />
+          <p class="todo-name">Todo 1</p>
+        </div>
+        <div class="todo-btn">
+          <button class="todo-edit">Edit</button
+          ><button class="todo-delete">Delete</button>
+        </div>
+      </div>
+      <div class="todo">
+        <div class="todo-info">
+          <input type="checkbox" class="todo-completed" checked />
+          <p class="todo-name">Todo 2</p>
+        </div>
+        <div class="todo-btn">
+          <button class="todo-edit">Edit</button
+          ><button class="todo-delete">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-background">
+      <div class="modal">
+        <div class="modal-top">
+          <h1>Edit Todo</h1>
+          <span class="close-modal" id="close-modal">&#10006;</span>
+        </div>
+        <div class="modal-bottom">
+          <input type="text" id="edit-todo-name" placeholder="Enter todo" />
+          <div id="edit-todo-completed-wrapper">
+            <input type="checkbox" id="edit-todo-completed" /> Completed
+          </div>
+          <button id="save-todo">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
