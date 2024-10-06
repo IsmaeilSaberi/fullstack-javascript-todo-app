@@ -2,6 +2,12 @@ const todoContainer = document.querySelector(".todo-container");
 const inputTodo = document.getElementById("input-todo");
 const addTodo = document.getElementById("add-todo");
 
+const modalBG = document.querySelector(".modal-background");
+const closeModal = document.querySelector("#close-modal");
+const editTodoName = document.getElementById("edit-todo-name");
+const editTodoCompleted = document.getElementById("edit-todo-completed");
+const saveTodo = document.getElementById("save-todo");
+
 let todoArray = [];
 
 const URL = "http://localhost:4000";
@@ -47,6 +53,40 @@ async function del_todo(todoElem) {
   }
 }
 
+async function edit_todo(todoElem) {
+  try {
+    let edit_url = URL + "/edit-todo/" + todoElem.id;
+    let options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: todoElem.id,
+        name: editTodoName.value,
+        completed: editTodoCompleted.checked,
+      }),
+    };
+
+    const response = await fetch(edit_url, options);
+    const data = response.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
+function open_modal(todoElem) {
+  editTodoName.value = todoElem.name;
+  editTodoCompleted.checked = todoElem.completed;
+  modalBG.style.display = "block";
+  closeModal.addEventListener("click", () => {
+    modalBG.style.display = "none";
+  });
+  saveTodo.addEventListener("click", () => {
+    modalBG.style.display = "none";
+    edit_todo(todoElem);
+  });
+}
+
 function display_todos(todoArr) {
   todoArr.forEach((todoElem) => {
     console.log(todoElem);
@@ -77,6 +117,7 @@ function display_todos(todoArr) {
     todoEdit.addEventListener("click", (e) => {
       e.preventDefault();
       console.log("Open Model");
+      open_modal(todoElem);
     });
     let todoDel = document.createElement("button");
     todoDel.classList.add("todo-delete");
