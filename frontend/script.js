@@ -41,24 +41,29 @@ function display_todos(todoArr) {
 
     // Buttons of todo element
     let todoEdit = document.createElement("button");
-    todoName.classList.add("todo-edit");
+    todoEdit.classList.add("todo-edit");
     todoEdit.innerHTML = "Edit";
     todoEdit.addEventListener("click", (e) => {
       e.preventDefault();
       console.log("Open Model");
     });
     let todoDel = document.createElement("button");
-    todoName.classList.add("todo-delete");
-    todoEdit.innerHTML = "Delete";
-    todoEdit.addEventListener("click", (e) => {
+    todoDel.classList.add("todo-delete");
+    todoDel.innerHTML = "Delete";
+    todoDel.addEventListener("click", (e) => {
       e.preventDefault();
       console.log("Delete Model");
     });
 
     todoInfo.appendChild(todoCompleted);
     todoInfo.appendChild(todoName);
-    todoInfo.appendChild(todoEdit);
-    todoInfo.appendChild(todoDel);
+    todoBtn.appendChild(todoEdit);
+    todoBtn.appendChild(todoDel);
+
+    todo.appendChild(todoInfo);
+    todo.appendChild(todoBtn);
+
+    todoContainer.appendChild(todo);
   });
 }
 
