@@ -123,7 +123,6 @@ function display_todos(todoArr) {
     todoDel.classList.add("todo-delete");
     todoDel.innerHTML = "Delete";
     todoDel.addEventListener("click", (e) => {
-      e.preventDefault();
       console.log("Delete Model");
       del_todo(todoElem);
     });

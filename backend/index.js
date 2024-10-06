@@ -12,7 +12,7 @@ app.use(express.json());
 // middleware for security and making requests possible
 app.use(cors());
 
-// creating some fake todos
+// creating some fake todos // in the future project we have to use dataBase
 const todos = [
   {
     id: 1,
@@ -52,7 +52,6 @@ app.get("/todos/:id", (req, res) => {
 
 ////// other routes with GET, POST, DELETE, PUT, PATCH
 app.post("/add-todos", (req, res) => {
-  console.log(req.body);
   todos.push({ id: uuid.v4(), ...req.body });
   res.json({ message: "adding todos", data: todos });
 });
