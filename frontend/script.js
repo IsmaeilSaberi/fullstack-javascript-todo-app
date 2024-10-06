@@ -16,6 +16,22 @@ async function get_todos() {
   }
 }
 
+async function post_todos() {
+  try {
+    let options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: inputTodo.value, completed: false }),
+    };
+
+    const response = await fetch(`${URL}/add-todos`, options);
+    const data = response.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
 function display_todos(todoArr) {
   todoArr.forEach((todoElem) => {
     console.log(todoElem);
@@ -74,3 +90,9 @@ get_todos()
     display_todos(todoArray);
   })
   .catch((error) => console.log(error));
+
+addTodo.addEventListener("click", () => {
+  if (inputTodo.value != "") {
+    post_todos();
+  }
+});

@@ -52,6 +52,7 @@ app.get("/todos/:id", (req, res) => {
 
 ////// other routes with GET, POST, DELETE, PUT, PATCH
 app.post("/add-todos", (req, res) => {
+  console.log(req.body);
   todos.push({ id: uuid.v4(), ...req.body });
   res.json({ message: "adding todos", data: todos });
 });
