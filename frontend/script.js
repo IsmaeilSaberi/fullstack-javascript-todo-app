@@ -32,6 +32,21 @@ async function post_todos() {
   }
 }
 
+async function del_todo(todoElem) {
+  try {
+    const del_url = URL + "/delete-todo/" + todoElem.id;
+
+    const response = await fetch(del_url, {
+      method: "DELETE",
+    });
+
+    const data = response.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
 function display_todos(todoArr) {
   todoArr.forEach((todoElem) => {
     console.log(todoElem);
@@ -69,6 +84,7 @@ function display_todos(todoArr) {
     todoDel.addEventListener("click", (e) => {
       e.preventDefault();
       console.log("Delete Model");
+      del_todo(todoElem);
     });
 
     todoInfo.appendChild(todoCompleted);
