@@ -29,11 +29,16 @@ const todos = [
     name: "This is todo 3",
     completed: false,
   },
+  {
+    id: 4,
+    name: "This is todo 4",
+    completed: false,
+  },
 ];
 
 // first route
 app.get("/", (req, res) => {
-  res.json({ msg: "Todo list is running" });
+  res.json({ msg: "Todo list is runninggggg" });
 });
 
 // route for getting todoes
@@ -77,5 +82,5 @@ app.delete("/delete-todo/:id", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("app is running on port ", PORT);
+  console.log(`app is running on port ${PORT}`);
 });

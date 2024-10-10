@@ -8,14 +8,17 @@ const editTodoName = document.getElementById("edit-todo-name");
 const editTodoCompleted = document.getElementById("edit-todo-completed");
 const saveTodo = document.getElementById("save-todo");
 
+// یک آرایه خالی برای نگه داشتن اطلاعات  todo ها ایجاد می کنیم
 let todoArray = [];
 
 const URL = "http://localhost:4000";
 
+// یک تابع اسینک برای گرفتن اطلاعات تو دو ها از سرور
 async function get_todos() {
   try {
     const res = await fetch(`${URL}/todos`);
     const data = await res.json();
+    // console.log(data);
     return data;
   } catch (error) {
     return error;
@@ -74,6 +77,7 @@ async function edit_todo(todoElem) {
   }
 }
 
+//// توابع سمت یو آی که زمانبر نیستند
 function open_modal(todoElem) {
   editTodoName.value = todoElem.name;
   editTodoCompleted.checked = todoElem.completed;
@@ -89,7 +93,7 @@ function open_modal(todoElem) {
 
 function display_todos(todoArr) {
   todoArr.forEach((todoElem) => {
-    console.log(todoElem);
+    // console.log(todoElem);
 
     // Parent element for display todos
     let todo = document.createElement("div");
@@ -139,9 +143,10 @@ function display_todos(todoArr) {
   });
 }
 
+/// اجرای تابع برای دریافت تودوها و سپس قرار دادن آنها درون آرایه خالی که تعریف کرده بودیم
 get_todos()
-  .then((todoArr) => {
-    todoArray = todoArr.todos;
+  .then((data) => {
+    todoArray = data.todos;
     console.log(todoArray);
     display_todos(todoArray);
   })
