@@ -3,6 +3,12 @@ const express = require("express");
 const cors = require("cors");
 // a package for generating id
 const uuid = require("uuid");
+// پکیج برای اتصال به دیتابیس مونگو دی بی و ایجاد مدل برای ذخیره اطلاعات
+const mongoose = require("mongoose");
+const { addTodo } = require("./controllers/TodoCtrl");
+// برای مدیریت و خواندن ثابت های امنیتی اپلیکیشن که نمی خواهیم در گیت هاب پوش شوند
+require("dotenv/config");
+
 const app = express();
 
 const PORT = 4000;
@@ -56,10 +62,7 @@ app.get("/todos/:id", (req, res) => {
 });
 
 ////// other routes with GET, POST, DELETE, PUT, PATCH
-app.post("/add-todos", (req, res) => {
-  todos.push({ id: uuid.v4(), ...req.body });
-  res.json({ message: "adding todos", data: todos });
-});
+app.post("/add-todos", addTodo);
 
 app.put("/edit-todo/:id", (req, res) => {
   // finding the todo based on id
@@ -84,3 +87,9 @@ app.delete("/delete-todo/:id", (req, res) => {
 app.listen(PORT, () => {
   console.log(`app is running on port ${PORT}`);
 });
+
+// connect to data base
+mongoose
+  .connect(process.env.DB_CONNECTION_URL)
+  .then((d) => console.log("connected to db"))
+  .catch((error) => console.log(error));
